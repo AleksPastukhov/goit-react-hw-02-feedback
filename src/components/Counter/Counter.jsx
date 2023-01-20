@@ -1,28 +1,29 @@
 import React from 'react';
-// import CounterBtnList from './CounterBtnList';
-// import CounterValueList from './CounterValueList';
-import {
-  CounterStyles,
-  CounterList,
-  CounterValue,
-  CounterControls,
-} from './Counter.styled';
+import Section from '../Section/Section';
+import FeedbackOptions from '../Feedback/FeedbackOptions';
+import Statistics from '../Statistic/Statistics';
 
 class Counter extends React.Component {
-  state = {
+  static defaultProps = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
 
-  handleIncrement = event => {
+  state = {
+    good: this.props.good,
+    neutral: this.props.neutral,
+    bad: this.props.bad,
+  };
+
+  addFeedback = event => {
     this.setState(prevState => {
       switch (event.target.textContent) {
         case 'Good':
           return {
             good: prevState.good + 1,
           };
-        case 'Nuetral':
+        case 'Neutral':
           return {
             neutral: prevState.neutral + 1,
           };
@@ -33,62 +34,38 @@ class Counter extends React.Component {
         default:
           return;
       }
-
-      //   if (event.target.textContent === 'Good') {
-      //     return {
-      //       good: prevState.good + 1,
-      //     };
-      //   } else if (event.target.textContent === 'Nuetral') {
-      //     return {
-      //       neutral: prevState.neutral + 1,
-      //     };
-      //   } else {
-      //     return {
-      //       bad: prevState.bad + 1,
-      //     };
-      //   }
     });
+  };
+
+  countTotalFeedback = () => {
+    return this.state.good + this.state.neutral + this.state.bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    if (this.state.good === 0) {
+      return 100;
+    } else {
+      return Math.round(this.state.good / (this.countTotalFeedback() / 100));
+    }
   };
 
   render() {
     return (
-      <CounterStyles>
-        <h1>Please leave feedback</h1>
-        <CounterControls onClick={this.handleIncrement}>
-          <li>
-            <button type="button">Good</button>
-          </li>
-          <li>
-            <button type="button">Nuetral</button>
-          </li>
-          <li>
-            <button type="button">Bad</button>
-          </li>
-        </CounterControls>
-        <h2>Statistics</h2>
-        <CounterList>
-          <li>
-            Good <CounterValue>{this.state.good}</CounterValue>
-          </li>
-          <li>
-            Nuetral <CounterValue>{this.state.neutral}</CounterValue>
-          </li>
-          <li>
-            Bad <CounterValue>{this.state.bad}</CounterValue>
-          </li>
-        </CounterList>
-      </CounterStyles>
+      <Section title={'Please leave feedback'}>
+        <FeedbackOptions
+          options={['Good', 'Neutral', 'Bad']}
+          onLeaveFeedback={this.addFeedback}
+        />
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        />
+      </Section>
     );
   }
-
-  //   render() {
-  //     return (
-  //       <CounterStyles>
-  //         <CounterBtnList />
-  //         <CounterValueList />
-  //       </CounterStyles>
-  //     );
-  //   }
 }
 
 export default Counter;

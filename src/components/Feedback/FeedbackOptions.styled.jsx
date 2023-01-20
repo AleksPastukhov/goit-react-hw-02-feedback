@@ -1,12 +1,5 @@
 import styled from '@emotion/styled';
-
-export const CounterStyles = styled.div`
-  width: 400px;
-  padding: 10px;
-  border: 1px solid black;
-`;
-
-export const CounterControls = styled.ul`
+export const FeedbackBtns = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
@@ -33,16 +26,3 @@ export const CounterControls = styled.ul`
     }
   }
 `;
-export const CounterList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  & li {
-    margin-right: 15px;
-    margin-left: 15px;
-    font-size: 32px;
-    font-family: monospace;
-  }
-`;
-
-export const CounterValue = styled.span``;
