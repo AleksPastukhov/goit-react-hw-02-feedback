@@ -9,7 +9,7 @@ export const Title = styled.h1`
 
 export const SectionStyles = styled.section`
   border: 2px solid black;
-  width: 100%;
+  width: 500px;
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
