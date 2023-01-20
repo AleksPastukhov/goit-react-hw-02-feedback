@@ -1,7 +1,7 @@
 import React from 'react';
-import Section from '../Section/Section';
-import FeedbackOptions from '../Feedback/FeedbackOptions';
-import Statistics from '../Statistic/Statistics';
+import Section from './Section';
+import FeedbackOptions from './Feedback';
+import Statistics from './Statistic';
 
 class Counter extends React.Component {
   static defaultProps = {
@@ -43,13 +43,18 @@ class Counter extends React.Component {
 
   countPositiveFeedbackPercentage = () => {
     if (this.state.good === 0) {
-      return 100;
+      return '100%';
     } else {
-      return Math.round(this.state.good / (this.countTotalFeedback() / 100));
+      const value = Math.round(
+        this.state.good / (this.countTotalFeedback() / 100)
+      );
+      return `${value}%`;
     }
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <Section title={'Please leave feedback'}>
         <FeedbackOptions
@@ -57,9 +62,9 @@ class Counter extends React.Component {
           onLeaveFeedback={this.addFeedback}
         />
         <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
+          good={good}
+          neutral={neutral}
+          bad={bad}
           total={this.countTotalFeedback()}
           positivePercentage={this.countPositiveFeedbackPercentage()}
         />

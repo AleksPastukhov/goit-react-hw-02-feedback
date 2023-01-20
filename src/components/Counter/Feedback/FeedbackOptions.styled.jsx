@@ -5,12 +5,13 @@ export const FeedbackBtns = styled.ul`
   padding: 0;
   display: flex;
   gap: 20px;
+  justify-content: space-evenly;
 
   & button {
     min-width: 100px;
     border: none;
     padding: 10px 15px;
-    background-color: teal;
+    background-color: #00afb5;
     color: #fff;
     font-weight: 500;
     margin-left: 5px;
@@ -18,11 +19,7 @@ export const FeedbackBtns = styled.ul`
     font-family: inherit;
     cursor: pointer;
     outline: none;
-    box-shadow: 1px 2px 2px 0 rgb(0 0 0 / 0.5);
+    box-shadow: 0px 0px 300px -12px rgba(135, 249, 255, 1);
     transition: box-shadow 250ms linear;
-
-    &: active {
-      box-shadow: 2px 5px 2px 0 rgb(0 0 0 / 0.5);
-    }
   }
 `;
